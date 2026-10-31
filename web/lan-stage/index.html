@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Pelagivex · LAN test</title>
+<link rel="stylesheet" href="stage.css?v=2"></head><body>
+<header><div><span class="eyebrow">PELAGIVEX · LAN TEST</span><h1 data-i18n="heading">Live underwater gate detection</h1></div><div class="header-actions"><span id="mode" class="pill">Ready</span><button id="language" class="secondary" type="button" aria-label="Switch language to Chinese">中文</button></div></header>
+<p data-i18n="intro">Experimental: when your phone and Mac share Wi-Fi, frames are sent over the local network. If it cannot connect, it falls back to public HTTP.</p>
+<div class="surfaces"><div class="surface"><div class="label" data-i18n="input">Input</div><video id="source" muted playsinline></video></div><div class="surface"><div class="label" data-i18n="output">Corresponding analyzed frame</div><canvas id="result"></canvas></div></div>
+<div class="controls"><button id="camera" data-i18n="camera">Open camera</button><label for="file" class="file secondary"><span data-i18n="file">Choose video</span><input type="file" id="file" accept="video/*"></label><button id="start" disabled data-i18n="start">Start detection</button><button id="stop" class="secondary" disabled data-i18n="stop">Stop and close</button></div>
+<div class="status"><strong id="status">Choose a video or open the camera, then start detection.</strong><div id="stats" class="stats"></div></div><p class="warn" data-i18n="warning">Only frames are sent; audio is not collected. This model is experimental and must not be used to control real equipment.</p>
+<script src="stage.js?v=2" defer></script></body></html>

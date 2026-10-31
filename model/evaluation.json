@@ -1,0 +1,150 @@
+{
+  "selection": {
+    "selection": "highest RF-DETR COCO AP@[0.50:0.95] on validation only",
+    "validation_epochs": [
+      {
+        "run": "gate-valid",
+        "epoch": 1,
+        "validation_ap_50_95": 0.7230102391793763,
+        "validation_ap_50": 0.9722720760829398
+      },
+      {
+        "run": "gate-3epoch",
+        "epoch": 2,
+        "validation_ap_50_95": 0.8172750301090023,
+        "validation_ap_50": 0.9732204923500657
+      },
+      {
+        "run": "gate-3epoch",
+        "epoch": 3,
+        "validation_ap_50_95": 0.8513887075647482,
+        "validation_ap_50": 0.9752345754949296
+      }
+    ],
+    "selected": {
+      "run": "gate-3epoch",
+      "epoch": 3,
+      "validation_ap_50_95": 0.8513887075647482,
+      "validation_ap_50": 0.9752345754949296
+    },
+    "checkpoint": "runs/gate-3epoch/checkpoint_best_total.pth",
+    "checkpoint_sha256": "2c82653e37a4d29dc7e7c5ec3a688eb97a428661bca01c54fbed5c65034623c4"
+  },
+  "final_evaluation": {
+    "checkpoint": "runs/gate-3epoch/checkpoint_best_total.pth",
+    "device": "mps",
+    "threshold_selected_on_validation": 0.2,
+    "validation_threshold_sweep": {
+      "0.05": {
+        "images": 120,
+        "tp": 99,
+        "fp": 39,
+        "fn": 3,
+        "precision": 0.717391304347826,
+        "recall": 0.9705882352941176,
+        "f1": 0.825
+      },
+      "0.1": {
+        "images": 120,
+        "tp": 98,
+        "fp": 8,
+        "fn": 4,
+        "precision": 0.9245283018867925,
+        "recall": 0.9607843137254902,
+        "f1": 0.9423076923076923
+      },
+      "0.2": {
+        "images": 120,
+        "tp": 98,
+        "fp": 2,
+        "fn": 4,
+        "precision": 0.98,
+        "recall": 0.9607843137254902,
+        "f1": 0.9702970297029702
+      },
+      "0.3": {
+        "images": 120,
+        "tp": 97,
+        "fp": 1,
+        "fn": 5,
+        "precision": 0.9897959183673469,
+        "recall": 0.9509803921568627,
+        "f1": 0.9700000000000001
+      },
+      "0.4": {
+        "images": 120,
+        "tp": 94,
+        "fp": 1,
+        "fn": 8,
+        "precision": 0.9894736842105263,
+        "recall": 0.9215686274509803,
+        "f1": 0.9543147208121827
+      },
+      "0.5": {
+        "images": 120,
+        "tp": 94,
+        "fp": 1,
+        "fn": 8,
+        "precision": 0.9894736842105263,
+        "recall": 0.9215686274509803,
+        "f1": 0.9543147208121827
+      },
+      "0.6": {
+        "images": 120,
+        "tp": 93,
+        "fp": 1,
+        "fn": 9,
+        "precision": 0.9893617021276596,
+        "recall": 0.9117647058823529,
+        "f1": 0.9489795918367346
+      },
+      "0.7": {
+        "images": 120,
+        "tp": 92,
+        "fp": 1,
+        "fn": 10,
+        "precision": 0.989247311827957,
+        "recall": 0.9019607843137255,
+        "f1": 0.9435897435897437
+      }
+    },
+    "test_split": "finaltest",
+    "test_full": {
+      "images": 231,
+      "tp": 149,
+      "fp": 6,
+      "fn": 4,
+      "precision": 0.9612903225806452,
+      "recall": 0.9738562091503268,
+      "f1": 0.9675324675324675
+    },
+    "test_dhash_screened_sensitivity": {
+      "images": 152,
+      "tp": 84,
+      "fp": 4,
+      "fn": 2,
+      "precision": 0.9545454545454546,
+      "recall": 0.9767441860465116,
+      "f1": 0.9655172413793104
+    },
+    "near_duplicate_screen": "64-bit dHash distance <=3 from a training frame; heuristic only",
+    "data_limitation": "Original train/validation/test video or scene grouping unknown; not an independent-scene assessment.",
+    "median_inference_seconds": 0.025493749999441206
+  },
+  "synthetic_challenge": {
+    "dataset": "jack-www/sauvc-v1 v2 COCO, 10 preselected held-out synthetic layouts",
+    "license": "MIT as dataset publisher declares",
+    "checkpoint": "runs/gate-3epoch/checkpoint_best_total.pth",
+    "threshold_frozen_from_real_validation": 0.2,
+    "metrics_iou_0_5": {
+      "images": 10,
+      "tp": 9,
+      "fp": 3,
+      "fn": 3,
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75
+    },
+    "limitation": "Only 10 synthetic images; this is not evidence of real-world generalization."
+  }
+}
