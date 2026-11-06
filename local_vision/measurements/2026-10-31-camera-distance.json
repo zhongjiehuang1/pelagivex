@@ -1,0 +1,73 @@
+{
+  "description": "User-provided physical distances, one frozen camera frame and one manually selected tissue-box point at each position. No camera imagery saved.",
+  "date": "2026-10-31",
+  "unit": "metres",
+  "calibration": {
+    "type": "scale",
+    "value": 0.489,
+    "derived_from_user_distance_m": 1.0,
+    "depth_mode": "mixed",
+    "note": "Restored from the prior live session rounded to three decimal places; the calibration point is not an independent test."
+  },
+  "samples": [
+    {
+      "frame": 15,
+      "camera_time": "03:45:09",
+      "actual_m": 0.5,
+      "base_fp32_m": 0.94,
+      "base_mixed_m": 0.94,
+      "calibrated_m": 0.46,
+      "calibrated_error_m": -0.04,
+      "detection": "not detected in frozen frame",
+      "note": "user confirmed distance; manually selected point"
+    },
+    {
+      "frame": 229,
+      "camera_time": "03:46:32",
+      "actual_m": 1.5,
+      "base_fp32_m": 2.47,
+      "base_mixed_m": 2.46,
+      "calibrated_m": 1.2,
+      "calibrated_error_m": -0.3,
+      "detection": "tissue box",
+      "note": "user confirmed distance; manually selected point"
+    },
+    {
+      "frame": 866,
+      "camera_time": "03:50:10",
+      "actual_m": 1.0,
+      "base_fp32_m": 1.71,
+      "base_mixed_m": 1.71,
+      "calibrated_m": 0.83,
+      "calibrated_error_m": -0.17,
+      "detection": "tissue box",
+      "note": "user reconfirmed distance; manually selected point; held out from two-point candidate"
+    }
+  ],
+  "limitations": [
+    "One frame per distance, no repeated-trial uncertainty estimate.",
+    "Distance values are user-provided and refer to the selected object; camera-axis and straight-line distances can differ.",
+    "Rounded results copied from the application display.",
+    "Single camera and one object; accuracy does not generalize automatically."
+  ],
+  "two_point_candidate": {
+    "fit_frames": [
+      15,
+      229
+    ],
+    "holdout_frame": 866,
+    "slope_from_rounded_display_values": 0.6578947368421053,
+    "offset_m_from_rounded_display_values": -0.11842105263157898,
+    "holdout_predicted_m": 1.0066,
+    "holdout_absolute_error_m": 0.0066,
+    "old_scale_holdout_absolute_error_m": 0.17,
+    "note": "Applied manually to the mixed-precision live mode after a single held-out frame; same object and camera, limited evidence. Calibration resets on page reload or precision change.",
+    "applied": true,
+    "live_after_application": {
+      "camera_time": "03:52:34",
+      "actual_m_user_last_confirmed": 1.0,
+      "box_depth_display_m": 1.1,
+      "note": "different later frame and object box statistic; not the same pixel or an independent multi-scene validation"
+    }
+  }
+}

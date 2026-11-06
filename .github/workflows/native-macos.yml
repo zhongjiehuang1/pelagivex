@@ -1,0 +1,31 @@
+name: Native macOS validation
+on:
+  push:
+    paths: ['pelagivex-native/apps/macos/**', '.github/workflows/native-macos.yml']
+  pull_request:
+    paths: ['pelagivex-native/apps/macos/**', '.github/workflows/native-macos.yml']
+permissions:
+  contents: read
+concurrency:
+  group: native-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  native:
+    runs-on: macos-14
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: pelagivex-native/apps/macos/PelagiVexNative
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python contract tests
+        run: python3 -m unittest discover -s scripts -p 'test_*.py' -v
+      - name: Compile, test, and package camera-preview app
+        run: bash scripts/build.sh
+      - name: Package artifact (no model weights)
+        run: ditto -c -k --keepParent dist/PelagiVex.app dist/PelagiVex-camera-preview.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PelagiVex-camera-preview
+          path: pelagivex-native/apps/macos/PelagiVexNative/dist/PelagiVex-camera-preview.zip
+          retention-days: 7

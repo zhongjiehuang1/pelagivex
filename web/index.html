@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Pelagivex underwater gate detection.">
+  <title>Pelagivex — Underwater vision</title>
+  <link rel="stylesheet" href="style.css?v=2">
+  <script src="app.js?v=3" defer></script>
+  <script src="live.js?v=6" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Pelagivex home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 20c4-9 8-13 11-13s7 4 11 13M8 20h16M16 7v18"/><circle cx="16" cy="20" r="2.3"/></svg></span><span>PELAGIVEX</span></a>
+      <div class="header-right"><span class="header-label" data-i18n="workspace">UNDERWATER VISION</span><span class="header-divider" aria-hidden="true"></span><button class="language" id="language" type="button" aria-label="Switch to Chinese">中 <span aria-hidden="true">↗</span></button></div>
+    </header>
+
+    <main class="main">
+      <div class="intro">
+        <div><div class="eyebrow"><span class="pulse" aria-hidden="true"></span><span data-i18n="eyebrow">UNDERWATER VISION LAB</span></div><h1><span data-i18n="headlineA">See more</span><br><span class="muted-title" data-i18n="headlineB">beneath the surface.</span></h1><p class="intro-copy" data-i18n="intro">Detect underwater gates in images, video or camera footage.</p></div>
+        <div class="intro-note"><span class="note-line"></span><span data-i18n="introNote">MADE FOR EXPLORATION<br>START WITH AN IMAGE</span></div>
+      </div>
+
+      <div class="worktop"><div class="worktop-title"><span class="tiny-index">01</span><span data-i18n="workTitle">Detection workspace</span></div><div class="status" id="status"><span class="status-dot"></span><span id="status-text" data-i18n="checking">Connecting to model</span></div></div>
+      <nav class="mode-switch" aria-label="Input mode">
+        <button type="button" class="mode-button active" id="mode-image" aria-pressed="true">Image</button>
+        <button type="button" class="mode-button" id="mode-video" aria-pressed="false">Video</button>
+        <button type="button" class="mode-button" id="mode-camera" aria-pressed="false">Camera</button>
+      </nav>
+      <section class="workspace" id="image-workspace" aria-label="Detection workspace">
+        <div class="stage-column">
+          <div class="stage" id="stage">
+            <div class="ocean-grid" aria-hidden="true"></div>
+            <div class="stage-corner top-left" aria-hidden="true"></div><div class="stage-corner top-right" aria-hidden="true"></div><div class="stage-corner bottom-left" aria-hidden="true"></div><div class="stage-corner bottom-right" aria-hidden="true"></div>
+            <label class="dropzone" id="dropzone" for="file-input" role="button">
+              <span class="upload-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="7" y="7" width="34" height="34" rx="4"/><path d="M24 31V17m-6 6 6-6 6 6"/></svg></span>
+              <strong data-i18n="dropTitle">Drop an image here</strong>
+              <span class="drop-copy" data-i18n="dropCopy">or click to choose an underwater image</span>
+              <span class="file-types">JPG · PNG</span>
+            </label>
+            <div class="image-view" id="image-view" hidden>
+              <div class="image-frame"><img id="preview" alt="Underwater image to analyze"><svg id="overlay" role="img" aria-label="Detection boxes" preserveAspectRatio="none"></svg></div>
+              <div class="image-caption"><span id="file-name"></span><span id="image-size"></span></div><p class="image-note" id="resize-note" data-i18n="resizedNote" hidden>Prepared in your browser; the processed image is uploaded for detection.</p>
+            </div>
+            <input id="file-input" type="file" accept="image/jpeg,image/png" hidden>
+            <div class="stage-busy" id="busy" hidden><span class="spinner" aria-hidden="true"></span><span data-i18n="processing">Analyzing image</span></div>
+          </div>
+          <div class="stage-footer"><span><span class="crosshair" aria-hidden="true">✳</span> <span data-i18n="stageFooter">JPG / PNG · 20 MB max · larger images resized locally</span></span><span class="footer-coordinate" aria-hidden="true">VISION / 01</span></div>
+        </div>
+
+        <aside class="side-panel">
+          <div class="panel-top"><div class="panel-kicker"><span class="panel-index">02 / ANALYSIS</span><span class="panel-deco" aria-hidden="true">✳</span></div><h2 data-i18n="panelTitle">Start detecting</h2><p data-i18n="panelDescription">Experimental model for underwater gates only; low light or occlusion may cause missed detections.</p></div>
+          <div class="action-area"><label class="button secondary" for="file-input" id="choose-label" role="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V5m-4 4 4-4 4 4M5 15v4h14v-4"/></svg><span data-i18n="choose">Choose image</span></label><button class="button primary" id="detect" type="button" disabled><span data-i18n="detect">Detect gate</span><span class="button-arrow" aria-hidden="true">↗</span></button><button class="sample-button" id="sample" type="button" hidden><span data-i18n="sample">Try simulated sample</span><span aria-hidden="true">↗</span></button><p class="sample-credit" id="sample-credit" hidden><span data-i18n="sampleSource">Simulated image: </span><a href="https://huggingface.co/datasets/jack-www/sauvc-v1" target="_blank" rel="noopener noreferrer">SAUVC (MIT) ↗</a></p></div>
+          <div class="panel-rule"></div>
+          <div class="results" id="results" aria-live="polite"><div class="results-head"><span data-i18n="results">Detection results</span><span id="result-count">—</span></div><div id="empty-results" class="empty-results"><span class="empty-symbol" aria-hidden="true">⌁</span><p data-i18n="resultsEmpty">Results will appear here</p></div><div id="result-content" hidden><div class="result-summary" id="result-summary"></div><div class="detection-list" id="detection-list"></div><p class="result-note" data-i18n="resultNote">Confidence reflects the model's estimate, not a guarantee.</p></div><div id="error" class="error" role="alert" hidden></div></div>
+          <div class="panel-foot"><span class="foot-icon" aria-hidden="true">◌</span><span data-i18n="panelFoot">One image, one discovery</span></div>
+        </aside>
+      </section>
+
+      <section class="live-workspace" id="live-workspace" aria-label="Continuous detection workspace" hidden>
+        <div class="live-stage">
+          <div class="live-stage-heading"><span class="tiny-index">LIVE INPUT</span><span class="live-stage-hint" id="source-hint">Choose a local video</span></div>
+          <div class="video-surfaces">
+            <div class="video-surface"><div class="surface-label" id="source-label">Live input</div><video id="source-video" playsinline muted controls></video><div class="video-placeholder" id="source-placeholder">Choose a video to begin</div></div>
+            <div class="video-surface"><div class="surface-label" id="snapshot-label">Analyzed frame</div><canvas id="snapshot" hidden></canvas><div class="video-placeholder" id="snapshot-placeholder">Results will appear here</div></div>
+          </div>
+          <div class="live-caption" id="snapshot-caption">The analyzed frame is the exact image sent to the server; results lag behind the input.</div>
+        </div>
+        <aside class="live-panel">
+          <div class="panel-kicker"><span class="panel-index">02 / CONTINUOUS ANALYSIS</span><span class="panel-deco" aria-hidden="true">✳</span></div>
+          <h2 id="live-title">Continuous detection</h2>
+          <p id="live-description">Choose a local video. The page periodically sends frames to the server; the whole video and audio are not uploaded.</p>
+          <div class="live-actions">
+            <label class="button secondary" for="video-input" id="video-choose" role="button"><span id="video-choose-text">Choose video</span></label>
+            <input id="video-input" type="file" accept="video/*" hidden>
+            <button class="button secondary" type="button" id="camera-open" hidden>Open camera</button>
+            <button class="button primary" type="button" id="live-start" disabled><span id="live-start-text">Start continuous detection</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+            <button class="button secondary" type="button" id="live-stop" hidden>Stop detection</button>
+          </div>
+          <div class="panel-rule"></div>
+          <div class="live-state" aria-live="polite"><div class="results-head"><span id="live-result-title">Detection status</span><span id="live-count">—</span></div><p id="live-state-text">Choose a video to start.</p><p id="live-detail"></p><p class="result-note" id="live-note">Experimental underwater gate model. Not for controlling a real vehicle.</p><p class="error" role="alert" id="live-error" hidden></p></div>
+          <div class="panel-foot"><span class="foot-icon" aria-hidden="true">◌</span><span id="live-foot">Detection runs on the connected device</span></div>
+        </aside>
+      </section>
+
+      <section class="bottom-info" aria-label="About this prototype"><div><span class="bottom-index">01 / FOCUS</span><h3 data-i18n="focusTitle">Focused on gates</h3><p data-i18n="focusCopy">A prototype for underwater robotics vision.</p></div><div><span class="bottom-index">02 / OUTPUT</span><h3 data-i18n="outputTitle">See the details</h3><p data-i18n="outputCopy">View detected locations, confidence and processing time.</p></div><div><span class="bottom-index">03 / PURPOSE</span><h3 data-i18n="purposeTitle">Built to explore</h3><p data-i18n="purposeCopy">Research demonstration; not for controlling a real robot.</p></div></section>
+    </main>
+    <footer class="site-footer"><span>PELAGIVEX <span class="footer-separator">/</span> <span data-i18n="footerText">UNDERWATER VISION PROTOTYPE</span></span><span>UNDER THE SURFACE <span class="footer-separator">✳</span> BEYOND THE FRAME</span></footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pelagivex · 本机视觉</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar shell">
+    <a class="brand" href="/" aria-label="Pelagivex 首页"><span class="brand-icon">P</span> PELAGIVEX</a>
+    <div class="local-badge"><span class="dot"></span> 本机运行 <span class="muted">/ LOCAL VISION</span></div>
+  </header>
+  <main class="shell">
+    <section class="hero">
+      <div><div class="eyebrow">LOCAL CAMERA · MULTI-OBJECT DETECTION</div><h1>看见物体，<span>估计远近。</span></h1><p>使用本机摄像头识别多个物体，观察每个目标的估计距离。</p></div>
+      <div class="hero-note"><span></span><p>画面由本机处理<br>估计距离并非测量值</p></div>
+    </section>
+    <section class="workspace" aria-label="本机视觉工作台">
+      <div class="visuals">
+        <div class="section-label"><span>01 / 实时识别画面</span><span id="frame-label">等待识别</span></div>
+        <div class="stage result-stage"><video id="camera" autoplay playsinline muted aria-label="实时摄像头画面"></video><canvas id="result" aria-label="识别标记；比较帧冻结后可点击选点" hidden></canvas><div class="placeholder" id="camera-placeholder"><div class="target-icon">◎</div><strong>准备好观察周围</strong><span>打开摄像头开始本机分析</span></div><span id="result-placeholder" hidden aria-hidden="true"></span><div class="stage-tag">LIVE DETECTION</div></div>
+        <p class="caption">实时摄像头画面叠加最近完成的检测；标记和距离可能因推理延迟与当前画面错位。比较深度时将冻结同一分析帧，点击该画面可比较同一点的两个原始读数。</p>
+      </div>
+      <aside class="panel">
+        <div class="panel-heading"><div><div class="eyebrow">VISION CONSOLE</div><h2>实时识别</h2></div><span class="panel-index">01—03</span></div>
+        <p class="panel-copy">摄像头请求最高 120 帧/秒；<span id="camera-settings">等待摄像头</span>；<span id="camera-delivery">页面接收帧率待测</span>。下方识别速率单独显示。标记可能滞后；停止或关闭页面会释放摄像头。</p>
+        <button class="primary" id="start" type="button">打开摄像头并开始 <span>↗</span></button>
+        <button class="secondary" id="stop" type="button" disabled>停止并关闭摄像头</button>
+        <div class="status" id="status" role="status"><span class="dot"></span><span id="status-text">正在连接本机服务…</span></div>
+        <div class="detector-settings" aria-label="识别模型设置">
+          <label for="detector-mode">识别模式</label>
+          <select id="detector-mode">
+            <option value="coco">常见物体 · RF-DETR</option>
+            <option value="owl">文字搜索 · OWLv2 Base（实验）</option>
+            <option value="owl_large" selected>文字搜索 · OWLv2 Large（更慢）</option>
+          </select>
+          <div id="owl-options">
+            <label for="owl-prompts">英文物体名称，以逗号分隔</label>
+            <input id="owl-prompts" type="text" value="tissue box" maxlength="300" autocomplete="off" spellcheck="false" placeholder="tissue box, cup, bottle">
+            <button id="apply-prompts" class="secondary" type="button">应用搜索词</button>
+            <p>最多 8 个英文名称。首次运行可能较慢；结果标签为英文，实验模型可能误识别。</p>
+          </div>
+          <div id="detector-status" role="status" class="detector-status">OWLv2 Large（较慢）：tissue box；模型首次加载可能需要较长时间。</div>
+        </div>
+        <div class="depth-compare">
+          <label for="depth-mode">实时深度精度</label>
+          <select id="depth-mode"><option value="standard">标准 FP32</option><option value="mixed">混合精度（实验加速）</option><option value="large" selected>Depth Anything Large（较慢）</option></select>
+          <p>切换实时深度模型或精度会重置距离校准。混合精度与 Large 的准确度都需要在实际场景验证；Large 可能较慢。</p>
+          <p id="depth-mode-status" role="status">当前请求：Depth Anything Large，首次加载可能较慢。</p>
+          <label for="compare-model">选择对比模型</label>
+          <select id="compare-model"><option value="large">Depth Anything Large</option><option value="pro">Apple Depth Pro</option><option value="mixed">Base 混合精度（加速候选）</option></select>
+          <button id="compare-depth" class="secondary" type="button" disabled>比较 Base 与 Large 深度（单帧）</button>
+          <p>拍摄同一帧分别推理；完成后本窗口显示冻结的分析帧，点击目标查看两者未校准读数；摄像头继续运行。</p>
+          <p id="compare-result" role="status"></p>
+        </div>
+        <details class="measurement-log" id="measurement-log" open>
+          <summary>实测距离记录 <span>＋</span></summary>
+          <p>先冻结同一帧并点击目标内部，再输入该点的实测前向距离。记录保存在本页内，刷新后清空；不保存摄像头画面。</p>
+          <label for="measurement-distance">实测距离（米）</label>
+          <input id="measurement-distance" type="number" min="0.05" max="1000" step="0.01" inputmode="decimal" placeholder="例如 0.50">
+          <div class="measurement-buttons"><button id="measurement-save" class="secondary" type="button" disabled>记录该帧测量</button><button id="measurement-clear" class="secondary" type="button" disabled>清空记录</button></div>
+          <p id="measurement-status" role="status">等待冻结画面并选择目标。</p>
+          <div class="measurement-table-wrap"><table aria-label="不同实测距离下的模型估计误差"><thead><tr><th>画面</th><th>实测</th><th>Base 原始 / 误差</th><th>候选原始 / 误差</th><th>校准模式与系数 / 估计 / 误差</th></tr></thead><tbody id="measurement-rows"></tbody></table></div>
+          <p>误差 = 估计值 − 实测值；同一帧重复取点不是独立样本。单点校准不代表其他距离的精度。</p>
+          <div class="fit-preview" aria-label="两点拟合预览">
+            <h3>两点拟合预览</h3>
+            <p>手动选择两条已记录的点计算线性候选；其他同一模型的记录作为留出测试。只显示预览，不会更改实时距离或校准。</p>
+            <label for="fit-source">原始读数来源</label>
+            <select id="fit-source"><option value="base">Base 标准 FP32</option><option value="candidate">每条记录的候选模型（须一致）</option></select>
+            <label for="fit-first">拟合点一</label><select id="fit-first"><option value="">请选择记录</option></select>
+            <label for="fit-second">拟合点二</label><select id="fit-second"><option value="">请选择记录</option></select>
+            <button id="fit-calculate" class="secondary" type="button" disabled>预览两点拟合</button>
+            <p id="fit-status" role="status">至少记录两个不同实测距离，再选择拟合点。</p>
+            <div class="measurement-table-wrap"><table aria-label="两点拟合与留出测试结果"><thead><tr><th>记录 / 用途</th><th>实测</th><th>拟合预测</th><th>绝对误差</th><th>范围</th></tr></thead><tbody id="fit-rows"></tbody></table></div>
+            <p>留出点不得参与拟合。标为外推的预测超出拟合点范围，不能据此保证其他距离或场景准确。</p>
+          </div>
+        </details>
+        <div class="metric-row"><div><span>识别速率</span><strong id="fps">—</strong><small>帧 / 秒</small></div><div><span>本机处理</span><strong id="latency">—</strong><small>毫秒 / 帧</small></div><div><span>本帧目标</span><strong id="count">—</strong><small>个</small></div></div>
+        <div class="results-head"><span>检测结果</span><span id="frame-count">—</span></div>
+        <p class="list-hint">可点击目标列表选择最近分析帧的距离校准参照；单帧比较时可点击冻结画面。</p>
+        <div id="detections" class="detections"><p class="empty">等待识别结果</p></div>
+        <details class="calibration">
+          <summary>距离校准 <span>＋</span></summary>
+          <p>单点校准只调整比例；可手动应用两点仿射系数。任何校准均可能在其他距离或场景产生误差，尤其在拟合范围外。</p>
+          <div class="selected" id="selected">尚未选择目标</div>
+          <label for="known-distance">该目标的实测距离（米）</label>
+          <input id="known-distance" type="number" min="0.05" max="1000" step="0.01" inputmode="decimal" placeholder="例如 1.50">
+          <div class="cal-buttons"><button id="calibrate" class="secondary" type="button">应用校准</button><button id="reset-scale" class="secondary" type="button">重置</button></div>
+          <div class="scale-note" id="scale-note">当前：1.000 × 原始距离 + 0.000 米（未校准）</div>
+          <label for="affine-slope">仿射斜率 a</label>
+          <input id="affine-slope" type="number" min="0.01" max="100" step="any" inputmode="decimal" placeholder="例如 0.6579">
+          <label for="affine-offset">仿射偏移 b（米）</label>
+          <input id="affine-offset" type="number" min="-100" max="100" step="any" inputmode="decimal" placeholder="例如 -0.1184">
+          <button id="apply-affine" class="secondary" type="button">应用仿射系数</button>
+          <p>仅在相同摄像头与深度精度下使用。请先用独立实测点验证；超出拟合区间时为外推。预览不会自动应用。</p>
+          <label for="restore-scale-value">恢复已记录的校准系数</label>
+          <input id="restore-scale-value" type="number" min="0.01" max="100" step="0.001" inputmode="decimal" placeholder="例如 0.489">
+          <button id="restore-scale" class="secondary" type="button">恢复校准系数</button>
+          <p>系数仅适用于当前实时深度精度和原校准场景；改变精度、相机或场景后应重新验证。</p>
+          <p id="calibration-status" role="status"></p>
+        </details>
+        <p class="caution">仅供观察和研究，不能用于导航、避障或安全判断。</p>
+      </aside>
+    </section>
+    <footer><span>PELAGIVEX / LOCAL VISION</span><span>摄像头数据仅发送至本机服务</span></footer>
+  </main>
+</body>
+</html>

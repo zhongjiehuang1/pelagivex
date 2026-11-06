@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <title>Pelagivex · Underwater gate detection</title>
+  <link rel="stylesheet" href="mobile.css?v=4">
+  <script src="client.js?v=2" defer></script>
+  <script src="mobile.js?v=7" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="header"><div class="brand"><span class="brand-icon" aria-hidden="true">◌</span><span>PELAGIVEX</span></div><div class="header-actions"><span class="live-label"><span class="live-dot"></span><span data-en="LIVE DETECTION" data-zh="实时识别">LIVE DETECTION</span></span><button id="language" class="language" type="button" aria-label="Switch to Chinese">中</button></div></header>
+    <div class="heading"><h1 data-en="See beneath the surface" data-zh="看见水下的目标">See beneath the surface</h1><p data-en="Gate detection · processed on your Mac" data-zh="门框识别 · 由你的 Mac 处理">Gate detection · processed on your Mac</p></div>
+    <section class="viewer" aria-label="Analyzed frame">
+      <video id="source" muted playsinline autoplay aria-hidden="true" tabindex="-1"></video>
+      <canvas id="result" hidden aria-label="Detection frame and boxes"></canvas>
+      <div id="placeholder" class="placeholder"><div class="placeholder-icon" aria-hidden="true">⌾</div><strong id="placeholder-text">Opening camera</strong><span id="placeholder-detail">Please allow camera access</span></div>
+      <div id="stats" class="viewer-stats" hidden>—</div>
+    </section>
+    <div class="status-row"><div class="status"><span id="status-dot" class="status-dot"></span><span id="status" role="status" aria-live="polite">Opening camera…</span></div><span id="connection" class="connection">Preparing</span></div>
+    <div class="controls"><button id="camera" class="primary" type="button" hidden data-en="Open camera" data-zh="打开摄像头">Open camera</button><button id="stop" class="secondary" type="button" data-en="Stop detection" data-zh="停止识别">Stop detection</button></div>
+    <p class="note" data-en="Only frames are sent; audio is not captured. This is an experimental demo, not for controlling real equipment." data-zh="仅发送画面，不采集音频。结果为实验演示，不用于控制真实设备。">Only frames are sent; audio is not captured. This is an experimental demo, not for controlling real equipment.</p>
+  </main>
+</body>
+</html>

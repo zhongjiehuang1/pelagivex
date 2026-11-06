@@ -1,0 +1,7 @@
+# Python 3.11/3.12, Apple Silicon. Explicit first-pass pins, not a complete transitive lock.
+ultralytics==8.4.193
+coremltools==9.0
+torch==2.7.1
+torchvision==0.22.1
+numpy==1.26.4
+opencv-python==4.11.0.86

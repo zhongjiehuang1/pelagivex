@@ -1,0 +1,41 @@
+{
+  "input": [
+    {
+      "name": "input",
+      "shape": [
+        1,
+        3,
+        384,
+        384
+      ],
+      "type": "tensor(float)"
+    }
+  ],
+  "output": [
+    {
+      "name": "dets",
+      "shape": [
+        1,
+        300,
+        4
+      ],
+      "type": "tensor(float)"
+    },
+    {
+      "name": "labels",
+      "shape": [
+        1,
+        300,
+        1
+      ],
+      "type": "tensor(float)"
+    }
+  ],
+  "source_checkpoint": "runs/gate-3epoch/checkpoint_best_total.pth",
+  "checkpoint_sha256": "2c82653e37a4d29dc7e7c5ec3a688eb97a428661bca01c54fbed5c65034623c4",
+  "onnx_sha256": "48b7e5f293a0fd1be254cf6565dad1c0e3453bfb45384b0ff8e619a7c5146381",
+  "class_id": 0,
+  "class_name": "Gate",
+  "preprocessing": "RGB tensor, values 0-1, ImageNet normalization, bilinear 384x384 with antialias",
+  "postprocessing": "sigmoid on class 0; boxes cxcywh normalized to image dimensions; top 25"
+}

@@ -1,0 +1,13 @@
+.build/
+.swiftpm/
+dist/
+Model/
+Model-YOLO11x-seg/
+Model-YOLO11x-seg-768/
+Model-YOLO11x-seg-704/
+.venv-model/
+*.mlpackage/
+*.mlmodelc/
+*.pt
+__pycache__/
+.DS_Store
