@@ -1,0 +1,25 @@
+# Local environments and derived data
+.venv*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+data/
+runs/
+work/
+# Model binaries are stored as release artifacts rather than in Git.
+model/*.onnx
+model/*.pt
+model/*.pth
+model/*.safetensors
+# Build and runtime output
+target/
+*.war
+.DS_Store
+.cache/
+.tmp/
+.archive/
+
+# Local vision model weights and configuration are downloaded separately.
+/model/local-depth/
+/model/local-depth-large/
+/model/local-depth-pro/

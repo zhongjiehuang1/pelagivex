@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-07",
+  "application": "PelagiVex Native Preview v0.6",
+  "hardware": "MacBook Pro, Apple M5 Pro, 24 GB",
+  "backend": "Core ML, computeUnits=ALL, FP32",
+  "model": "yoloe-26s-seg-pf.pt",
+  "inputSize": 640,
+  "camera": {"name": "Camo Camera", "width": 1920, "height": 1080},
+  "method": "Transient accessibility-tree and screenshot observations of the running native application; not a sustained benchmark",
+  "minimumNewObjectConfidence": 0.25,
+  "outlineWidthPixels": 1.5,
+  "observations": [
+    {
+      "extraSAMBoundaryDetail": false,
+      "captureFPS": 30.0,
+      "inferenceFPS": 30.0,
+      "displayFPS": 28.3,
+      "preprocessMS": 0.5,
+      "modelMS": 20.0,
+      "postprocessMS": 0.4,
+      "callbackToGPUP95MS": 55.7,
+      "analyzedFrameAgeSeconds": 0.03,
+      "visibleTargets": 20
+    },
+    {
+      "extraSAMBoundaryDetail": true,
+      "captureFPS": 30.0,
+      "inferenceFPS": 6.0,
+      "displayFPS": 5.9,
+      "preprocessMS": 3.3,
+      "modelAndSAMWorkerMS": 301.8,
+      "postprocessMS": 17.6,
+      "callbackToGPUP95MS": 375.9,
+      "analyzedFrameAgeSeconds": 0.44,
+      "visibleTargets": 21
+    },
+    {
+      "extraSAMBoundaryDetail": true,
+      "note": "Final build reopened and Camo started successfully",
+      "captureFPS": 30.0,
+      "inferenceFPS": 3.5,
+      "displayFPS": 3.5,
+      "preprocessMS": 3.5,
+      "modelAndSAMWorkerMS": 248.0,
+      "postprocessMS": 18.3,
+      "callbackToGPUP95MS": 466.3,
+      "analyzedFrameAgeSeconds": 0.39,
+      "visibleTargets": 19
+    }
+  ],
+  "visualCheck": "Native masks and refined masks align with the analyzed camera image; SAM visually follows more detailed object edges. No ground-truth boundary or label accuracy was measured.",
+  "limitations": [
+    "Scene and attribute names occur in the 4585-name vocabulary, and visible false labels remain.",
+    "UI rates and latency counters cover different moving windows and cannot be inverted into one another.",
+    "Camera scene, target count, initialization and concurrent depth work affect rates.",
+    "The Model field includes SAM worker time when refinement is enabled.",
+    "Fine visual contours do not validate metric depth or improve the depth sampling mask automatically."
+  ],
+  "checks": {
+    "swiftTestsPassed": 45,
+    "swiftTestSuites": 5,
+    "releaseBuild": "passed",
+    "adHocSignatureVerification": "passed",
+    "legacyPairReplayReports": 12,
+    "legacyPairReplayComparison": "All 12 reports byte-identical to pair-study-results"
+  },
+  "verificationWorkingDirectory": "pelagivex-native/apps/macos/PelagiVexNative",
+  "verificationCommands": [
+    "bash scripts/build.sh",
+    "codesign --verify --deep --strict dist/PelagiVex.app",
+    "bash scripts/replay_pair_study.sh .cache-verification/yoloe26-legacy-replay",
+    "diff -qr pair-study-results .cache-verification/yoloe26-legacy-replay"
+  ],
+  "cameraFramesSaved": false,
+  "cameraFramesUploaded": false,
+  "fineTuningPerformed": false,
+  "architectureImprovementClaimed": false
+}

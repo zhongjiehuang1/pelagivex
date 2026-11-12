@@ -1,0 +1,14 @@
+# Local research/training environment verified on macOS ARM64, Python 3.12.
+rfdetr==1.4.0
+torch==2.8.0
+torchvision==0.23.0
+transformers==4.54.1
+huggingface-hub==0.36.2
+onnx==1.23.2
+onnxruntime==1.31.1
+onnx-graphsurgeon==0.6.1
+onnxsim==0.8.1
+numpy==2.5.4
+Pillow==13.0.0
+supervision==0.31.3
+pycocotools==2.0.11

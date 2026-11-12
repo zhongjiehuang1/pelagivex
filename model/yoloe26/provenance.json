@@ -1,0 +1,29 @@
+{
+  "package": "ultralytics",
+  "version": "8.4.193",
+  "isolatedPackagePath": ".cache/yoloe26/ultralytics-deps",
+  "architecture": "model/yoloe26/yoloe-26s-seg.yaml",
+  "architectureSHA256": "d7229c9ac13326d825d63859a16ed7239c5eab0749bccc7215baede1e03f3301",
+  "architectureOrigin": "ultralytics/cfg/models/26/yoloe-26-seg.yaml in ultralytics8.4.193; S scale filename retained",
+  "architectureConstructionCheck": {
+    "transferredCheckpointItems": 958,
+    "checkpointItems": 958,
+    "scale": "s",
+    "parameterCount": 15272852,
+    "trainingPerformed": false
+  },
+  "checkpoints": [
+    {
+      "name": "yoloe-26s-seg-pf.pt",
+      "officialURL": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yoloe-26s-seg-pf.pt",
+      "sha256": "01605da3f2e0e5325df45d5f5eef8e40b5b5c7d085399be3c33ac638258b150a"
+    },
+    {
+      "name": "yoloe-26s-seg.pt",
+      "officialURL": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yoloe-26s-seg.pt",
+      "sha256": "48f24206bc8680d60cbbfa296b0140da849669b9515058b72f5a945142df0654"
+    }
+  ],
+  "vocabularyCount": 4585,
+  "benchmark": ".cache/yoloe26/mps-benchmark.json"
+}

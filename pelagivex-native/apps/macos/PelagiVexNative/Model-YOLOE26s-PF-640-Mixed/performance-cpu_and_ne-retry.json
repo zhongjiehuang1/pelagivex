@@ -1,0 +1,88 @@
+{
+  "timestamp_utc": "2026-11-07T05:41:50.362715+00:00",
+  "status": "completed",
+  "condition": "Camera and GPU workers stopped. ANECompilerService showed 0.0% CPU before this retry.",
+  "compute_units": "CPU_AND_NE",
+  "cold_wall_limit_seconds": 60,
+  "warm_audit_limit_seconds": 20,
+  "elapsed_wall_seconds": 5.238273625000147,
+  "first_completed_prediction_observed_seconds": 3.3513808749994496,
+  "warm_calls_requested": 8,
+  "exit_code": 0,
+  "log": "/Users/zhongjiehuang/Downloads/pelagivex/.cache/yoloe26/mixed-performance-cpu-ne-retry.log",
+  "performance_report": "/Users/zhongjiehuang/Downloads/pelagivex/pelagivex-native/apps/macos/PelagiVexNative/Model-YOLOE26s-PF-640-Mixed/performance-cpu_and_ne.json",
+  "warm_calls_completed": 8,
+  "warm_median_seconds": 0.021681812499082298,
+  "warm_p95_seconds": 0.024263753850391367,
+  "high_class_ids": [
+    {
+      "reference_class": 3122,
+      "actual_class": 3122,
+      "actual_class_value": 3122.0,
+      "exact_class_value": true,
+      "reference_score": 0.6690758466720581,
+      "actual_score": 0.6611328125,
+      "box_normalized_mean_error": 0.0003710031451191753
+    },
+    {
+      "reference_class": 4353,
+      "actual_class": 4353,
+      "actual_class_value": 4353.0,
+      "exact_class_value": true,
+      "reference_score": 0.44130760431289673,
+      "actual_score": 0.53466796875,
+      "box_normalized_mean_error": 0.0006445169565267861
+    },
+    {
+      "reference_class": 3963,
+      "actual_class": 3963,
+      "actual_class_value": 3963.0,
+      "exact_class_value": true,
+      "reference_score": 0.2645529508590698,
+      "actual_score": 0.27099609375,
+      "box_normalized_mean_error": 0.000343644613167271
+    },
+    {
+      "reference_class": 4353,
+      "actual_class": 4353,
+      "actual_class_value": 4353.0,
+      "exact_class_value": true,
+      "reference_score": 0.2339199185371399,
+      "actual_score": 0.09649658203125,
+      "box_normalized_mean_error": 0.00057220458984375
+    },
+    {
+      "reference_class": 3122,
+      "actual_class": 3122,
+      "actual_class_value": 3122.0,
+      "exact_class_value": true,
+      "reference_score": 0.1826871782541275,
+      "actual_score": 0.1754150390625,
+      "box_normalized_mean_error": 0.00034459232119843364
+    },
+    {
+      "reference_class": 3927,
+      "actual_class": 3927,
+      "actual_class_value": 3927.0,
+      "exact_class_value": true,
+      "reference_score": 0.17390264570713043,
+      "actual_score": 0.0269622802734375,
+      "box_normalized_mean_error": 0.0004989624139852822
+    },
+    {
+      "reference_class": 3927,
+      "actual_class": 3927,
+      "actual_class_value": 3927.0,
+      "exact_class_value": true,
+      "reference_score": 0.1525290459394455,
+      "actual_score": 0.1287841796875,
+      "box_normalized_mean_error": 0.00012068152136635035
+    }
+  ],
+  "exact_high_class_id_matches": 7,
+  "planned_preferred_device_counts": {
+    "null": 964,
+    "MLCPUComputeDevice": 17,
+    "MLNeuralEngineComputeDevice": 319
+  }
+}

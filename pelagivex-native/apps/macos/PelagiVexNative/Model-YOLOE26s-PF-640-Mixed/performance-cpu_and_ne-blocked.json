@@ -1,0 +1,12 @@
+{
+  "compute_units": "CPU_AND_NE",
+  "status": "cold load did not return before bounded experiment ended",
+  "completed_prediction_calls": 0,
+  "first_call_latency": null,
+  "warm_latency": null,
+  "unpaused_observation_seconds_lower_bound": 84,
+  "total_audit_process_seconds_at_final_poll": 129,
+  "condition": "Camera off. ANECompilerService was already active around one CPU core after a cancelled SAM compile. The audit process was paused at elapsed 84 s so no predictions could begin during a coordinated SAM GPU retest, then cancelled at the next poll after the 120 s wall-clock budget. No system process was interrupted.",
+  "interpretation": "No usable CPU_AND_NE startup or warm measurement. The shared compiler queue and pause confound the cold-load bound; the result does not establish that this mixed graph is ineligible for the Neural Engine. Do not select CPU_AND_NE as a production default from this attempt.",
+  "log": ".cache/yoloe26/mixed-performance-cpu-ne.log"
+}

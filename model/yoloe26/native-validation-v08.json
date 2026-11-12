@@ -1,0 +1,209 @@
+{
+  "updatedUTC": "2026-11-07T05:41:02.907414+00:00",
+  "version": "0.8",
+  "defaultProfile": "Reference FP32 / MLComputeUnits.all",
+  "optionalProfile": "Efficient preview / selective FP16 with FP32 class IDs / CPU_AND_GPU",
+  "device": "Apple M5 Pro, 24 GiB, macOS26.5.1",
+  "scope": "Native release build plus offline stress/diagnostic runs and short UI camera observations. No annotated camera recording or measured accuracy improvement. Camera observations are nonconcurrent and not a controlled same-input benchmark.",
+  "buildLog": ".cache/contour-research/build-v08-final-verified.log",
+  "tests": {
+    "swiftPassed": 59,
+    "swiftSuites": 7,
+    "codeSignVerifiedByBuild": true,
+    "gitDiffCheck": "passed",
+    "missingWorkerFailureFixture": {
+      "exitCode": 1,
+      "reportValid": false,
+      "result": "SAM failure saved and rejected; not counted as successful fast contour processing"
+    },
+    "cameraStopWorkerCheck": {
+      "after": "Final v0.8 Camo Start -> observed live SAM -> Stop",
+      "activeSAMWorkers": [],
+      "noneFound": true
+    }
+  },
+  "camoUIObservations": [
+    {
+      "profile": "Efficient preview",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "captureFPS": 30,
+      "inferenceFPS": 29.6,
+      "displayFPS": 28.9,
+      "samFPS": 3.2,
+      "samWorkerMS": 248,
+      "samAgeSeconds": 0.41,
+      "fineTargets": [
+        20,
+        22
+      ],
+      "callbackToGPUP95MS": 66.7
+    },
+    {
+      "profile": "Reference",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "captureFPS": 30,
+      "inferenceFPS": 25.5,
+      "displayFPS": 24.8,
+      "samFPS": 3.1,
+      "samWorkerMS": 336,
+      "samAgeSeconds": 0.57,
+      "fineTargets": [
+        19,
+        23
+      ],
+      "callbackToGPUP95MS": 96.8
+    },
+    {
+      "profile": "Efficient preview (final rebuilt app, before stop/restart check)",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "captureFPS": 30,
+      "inferenceFPS": 29.7,
+      "displayFPS": 29.2,
+      "samFPS": 3.7,
+      "samWorkerMS": 232,
+      "samAgeSeconds": 0.3,
+      "fineTargets": [
+        16,
+        19
+      ],
+      "callbackToGPUP95MS": 76.3
+    },
+    {
+      "profile": "Efficient preview (final rebuilt app, after stop/restart)",
+      "resolution": [
+        1920,
+        1080
+      ],
+      "captureFPS": 30,
+      "inferenceFPS": 29.8,
+      "displayFPS": 28.7,
+      "samFPS": 3.6,
+      "samWorkerMS": 251,
+      "samAgeSeconds": 0.32,
+      "fineTargets": [
+        21,
+        25
+      ],
+      "callbackToGPUP95MS": 75.8
+    }
+  ],
+  "cameraSettings": {
+    "samEnabled": true,
+    "depthEnabled": true,
+    "threshold": 0.25,
+    "source": "Camo Camera",
+    "cameraImagesSaved": false
+  },
+  "limitations": [
+    "No new camera video or independent labels; incorrect scene labels remain visible.",
+    "Selective mixed precision changes individual scores and small masks; Reference remains the default.",
+    "No proven ANE runtime execution for the shipping profile.",
+    "FPS is detector throughput; SAM refresh and eligible contour reuse measured separately."
+  ],
+  "performanceReports": {
+    "native-reference-b.json": {
+      "seconds": 30,
+      "warmObservedFPS": 26.32,
+      "latencyP95MS": 58.454583333514165,
+      "actualSAMSubmissions": 109,
+      "actualSAMCompletions": 108,
+      "actualSAMFailures": 0,
+      "validForFineContourComparison": true,
+      "successfulWarmObservedSAMResults": null,
+      "sha256": "9e20f56ae150cbcf763816e2ef80db47863a1a2c38b457bf4f91b70a0dc1e026"
+    },
+    "native-reference-c.json": {
+      "seconds": 30,
+      "warmObservedFPS": 26.56,
+      "latencyP95MS": 60.193499997694744,
+      "actualSAMSubmissions": 116,
+      "actualSAMCompletions": 115,
+      "actualSAMFailures": 0,
+      "validForFineContourComparison": true,
+      "successfulWarmObservedSAMResults": null,
+      "sha256": "1495794deb098babb297494a9a7abfd89dcdc3992dccdf8876871330d7f16c60"
+    },
+    "native-efficient-a.json": {
+      "seconds": 30,
+      "warmObservedFPS": 30.04,
+      "latencyP95MS": 51.88829166581854,
+      "actualSAMSubmissions": 123,
+      "actualSAMCompletions": 123,
+      "actualSAMFailures": 0,
+      "validForFineContourComparison": true,
+      "successfulWarmObservedSAMResults": null,
+      "sha256": "f3e55586788e2f56c31a410e2133014e63b82e70e88f49367983021c1cec0970"
+    },
+    "native-efficient-b.json": {
+      "seconds": 30,
+      "warmObservedFPS": 30,
+      "latencyP95MS": 52.41508333347156,
+      "actualSAMSubmissions": 124,
+      "actualSAMCompletions": 123,
+      "actualSAMFailures": 0,
+      "validForFineContourComparison": true,
+      "successfulWarmObservedSAMResults": null,
+      "sha256": "a2562fc14527e6d57a16e1d38f3f946795e03e592f737bcf935c3fbc5601b9c8"
+    },
+    "final-async-smoke.json": {
+      "seconds": 12,
+      "warmObservedFPS": 30,
+      "latencyP95MS": 52.35587500283145,
+      "actualSAMSubmissions": 44,
+      "actualSAMCompletions": 43,
+      "actualSAMFailures": 0,
+      "validForFineContourComparison": true,
+      "successfulWarmObservedSAMResults": 30,
+      "sha256": "a40691667bad6da497ccb9518e627cc06f95bb9ad0cbea72c51cbfaa7da1b087"
+    },
+    "final-serial-smoke.json": {
+      "seconds": 12,
+      "warmObservedFPS": 7,
+      "latencyP95MS": 167.62212499816087,
+      "actualSAMSubmissions": 71,
+      "actualSAMCompletions": 71,
+      "actualSAMFailures": 0,
+      "validForFineContourComparison": true,
+      "successfulWarmObservedSAMResults": 49,
+      "sha256": "9a3ea942070c065c9f597bfbda33dc6a4170cbc25274c6d6cd693bf70f2a3618"
+    },
+    "final-missing-worker-check.json": {
+      "seconds": 6,
+      "warmObservedFPS": 0,
+      "latencyP95MS": 0,
+      "actualSAMSubmissions": 1,
+      "actualSAMCompletions": 0,
+      "actualSAMFailures": 1,
+      "validForFineContourComparison": false,
+      "successfulWarmObservedSAMResults": 0,
+      "sha256": "a5f04f203c3ce97a8c7f2fa257924f6e1eef3c994a0fcc7711fac7624e01f84b"
+    }
+  },
+  "artifactSHA256": {
+    "pelagivex-native/apps/macos/PelagiVexNative/Sources/PelagiVexNative/App.swift": "4042acad8b63d83bbe6ae154474bfebbf68ed31e93881458428aa5a49ce5b6b4",
+    "pelagivex-native/apps/macos/PelagiVexNative/Sources/PelagiVexNative/AsyncRefinement.swift": "f09c3f6ffa7ce27bc587b268d07ddb917409e9c122db9bb4f4fe8e2426b3105b",
+    "pelagivex-native/apps/macos/PelagiVexNative/Sources/PelagiVexNative/ContourBenchmark.swift": "32dc55ebad9420d252c2afd06968ce1571167a592410ab07b396431486784a9b",
+    "pelagivex-native/apps/macos/PelagiVexNative/Sources/PelagiVexNative/Inference.swift": "7e1de85ed701fc7516c446ffe9c77ba772081da298467056b0b48804e3290765",
+    "pelagivex-native/apps/macos/PelagiVexNative/Sources/PelagiVexNative/OpenVocabulary.swift": "a2ceec166232d4d88cd6dc410836961fccbc277a28d98a2dd6fdfd27f548325b",
+    "pelagivex-native/apps/macos/PelagiVexNative/Sources/PelagiVexNative/Renderer.swift": "5a7e8350eb550461ed75ecaa0ba4cf0f32edd20b62a53bc4a0d28f34aaa5222a",
+    "pelagivex-native/apps/macos/PelagiVexNative/scripts/build.sh": "67015a3377b75d54ac978b25740507200f11fe7611d13bd2fc9a0f56b92e9332",
+    "pelagivex-native/apps/macos/PelagiVexNative/dist/PelagiVex.app/Contents/MacOS/PelagiVexNative": "f228628fce5becb26825f73c6121bdf368281600a299ea45b70088c8d7687bd3",
+    "scripts/contour-research/oracle_contour_age.py": "fe5d76ec072fa9b54a9639addb052a9c3a046db67f96196d2d1497459a56ce01"
+  },
+  "neRetry": "pelagivex-native/apps/macos/PelagiVexNative/Model-YOLOE26s-PF-640-Mixed/performance-cpu_and_ne-retry.json",
+  "finalUIState": {
+    "camera": "Camo Camera running",
+    "profile": "Efficient preview",
+    "samEnabled": true,
+    "restartVerified": true
+  }
+}

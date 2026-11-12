@@ -1,0 +1,10 @@
+# Python 3.12, Apple Silicon. Versions used by the verified YOLOE26 PF export.
+# Explicit direct dependency pins, not a complete transitive lock.
+# coremltools 9 warns that torch 2.8 is newer than its tested 2.7; output parity
+# is required by export_yoloe.py before a bundle is published.
+ultralytics==8.4.193
+coremltools==9.0
+torch==2.8.0
+torchvision==0.23.0
+numpy==2.3.5
+Pillow==13.0.0

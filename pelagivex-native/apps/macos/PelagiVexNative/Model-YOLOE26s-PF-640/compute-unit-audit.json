@@ -1,0 +1,126 @@
+{
+  "model": "YOLOE26s PF FP32 CoreML640",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "compute_units": "ALL compared with verified CPU_ONLY conversion",
+  "timing_scope": "CoreML Python MLModel.predict only, saved640RGBsquareinput; excludescapture,letterbox,decode,tracking,render",
+  "warmups": 1,
+  "timed_repetitions": 5,
+  "reports": [
+    {
+      "sample": "real-letterboxed.png",
+      "first_call_seconds": 2.358594166998955,
+      "warm_seconds": [
+        0.03816112500135205,
+        0.0691571669995028,
+        0.036991458997363225,
+        0.040762000000540866,
+        0.032247999999526655
+      ],
+      "warm_median_seconds": 0.03816112500135205,
+      "matches": [
+        {
+          "cpu_class": 821,
+          "all_class": 821,
+          "box_normalized_mean_error": 0.0,
+          "score_error": 0.0
+        },
+        {
+          "cpu_class": 821,
+          "all_class": 821,
+          "box_normalized_mean_error": 4.17232506322307e-08,
+          "score_error": 1.7881393432617188e-07
+        },
+        {
+          "cpu_class": 3122,
+          "all_class": 3122,
+          "box_normalized_mean_error": 5.9604645663569045e-09,
+          "score_error": 3.5762786865234375e-07
+        },
+        {
+          "cpu_class": 4353,
+          "all_class": 4353,
+          "box_normalized_mean_error": 8.642673776648735e-08,
+          "score_error": 2.238154411315918e-05
+        },
+        {
+          "cpu_class": 3963,
+          "all_class": 3963,
+          "box_normalized_mean_error": 8.34465012644614e-08,
+          "score_error": 1.0132789611816406e-06
+        },
+        {
+          "cpu_class": 4353,
+          "all_class": 4353,
+          "box_normalized_mean_error": 1.1920928955078125e-07,
+          "score_error": 2.014636993408203e-05
+        },
+        {
+          "cpu_class": 571,
+          "all_class": 571,
+          "box_normalized_mean_error": 2.3841858265427618e-08,
+          "score_error": 4.172325134277344e-07
+        },
+        {
+          "cpu_class": 571,
+          "all_class": 571,
+          "box_normalized_mean_error": 3.5762788286319847e-08,
+          "score_error": 2.2351741790771484e-07
+        },
+        {
+          "cpu_class": 3122,
+          "all_class": 3122,
+          "box_normalized_mean_error": 1.2516974834397843e-07,
+          "score_error": 2.086162567138672e-06
+        },
+        {
+          "cpu_class": 3927,
+          "all_class": 3927,
+          "box_normalized_mean_error": 3.5762788286319847e-08,
+          "score_error": 8.940696716308594e-08
+        },
+        {
+          "cpu_class": 3927,
+          "all_class": 3927,
+          "box_normalized_mean_error": 5.662441182607836e-08,
+          "score_error": 1.1920928955078125e-07
+        }
+      ],
+      "prototype_mean_absolute_error": 1.1947031453019008e-06
+    },
+    {
+      "sample": "synthetic-gray.png",
+      "first_call_seconds": 0.04255620899857604,
+      "warm_seconds": [
+        0.027519415998540353,
+        0.023341042000538437,
+        0.035930832997109974,
+        0.03565866699864273,
+        0.03704904100231943
+      ],
+      "warm_median_seconds": 0.03565866699864273,
+      "matches": [],
+      "prototype_mean_absolute_error": 4.12938607041724e-06
+    },
+    {
+      "sample": "synthetic-random.png",
+      "first_call_seconds": 0.024396541997703025,
+      "warm_seconds": [
+        0.024182458000723273,
+        0.04555370899834088,
+        0.04448595899884822,
+        0.04594025000187685,
+        0.04413633299918729
+      ],
+      "warm_median_seconds": 0.04448595899884822,
+      "matches": [
+        {
+          "cpu_class": 1954,
+          "all_class": 1954,
+          "box_normalized_mean_error": 7.152557657263969e-08,
+          "score_error": 1.1920928955078125e-07
+        }
+      ],
+      "prototype_mean_absolute_error": 6.191761485752068e-07
+    }
+  ]
+}

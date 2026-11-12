@@ -1,0 +1,17 @@
+.build/
+.swiftpm/
+dist/
+Model/
+Model-YOLO11x-seg/
+Model-YOLO11x-seg-768/
+Model-YOLO11x-seg-704/
+.venv-model/
+*.mlpackage/
+*.mlmodelc/
+*.pt
+__pycache__/
+.DS_Store
+# Local replay copies and raw conversion evidence remain in the private full backup.
+.cache-verification/
+Model-YOLOE*/parity-inputs/
+Model-YOLOE*/*.npz

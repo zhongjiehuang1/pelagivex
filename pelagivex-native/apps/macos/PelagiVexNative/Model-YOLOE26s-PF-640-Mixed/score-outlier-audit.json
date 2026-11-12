@@ -1,0 +1,66 @@
+{
+  "input": "real-letterboxed.png",
+  "class_id": 4353,
+  "class_name": "veterinarians office",
+  "full_300_row_class_subset": {
+    "fp32_real-letterboxed": [
+      {
+        "score": 0.44130760431289673,
+        "box": [
+          1.620758056640625,
+          79.88265991210938,
+          641.30517578125,
+          328.6932373046875
+        ]
+      },
+      {
+        "score": 0.2339199185371399,
+        "box": [
+          2.668701171875,
+          80.20077514648438,
+          641.68408203125,
+          328.8736877441406
+        ]
+      },
+      {
+        "score": 0.00033564071054570377,
+        "box": [
+          5.548187255859375,
+          78.71533203125,
+          639.8336791992188,
+          325.2005310058594
+        ]
+      }
+    ],
+    "mixed_real-letterboxed": [
+      {
+        "score": 0.64306640625,
+        "box": [
+          1.75,
+          79.875,
+          641.5,
+          328.75
+        ]
+      },
+      {
+        "score": 0.0117340087890625,
+        "box": [
+          2.75,
+          80.1875,
+          642.0,
+          328.75
+        ]
+      },
+      {
+        "score": 0.0003597736358642578,
+        "box": [
+          5.5,
+          78.75,
+          640.0,
+          325.25
+        ]
+      }
+    ]
+  },
+  "interpretation": "The mixed maximum exceeds every reference row of the same class, so row pairing cannot explain the whole score difference. Nearby boxes are duplicate-like; anchor identity and the exact internal cause of the score shift are not established."
+}

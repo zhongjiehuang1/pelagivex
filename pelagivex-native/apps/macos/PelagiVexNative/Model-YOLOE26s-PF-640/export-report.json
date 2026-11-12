@@ -1,0 +1,184 @@
+{
+  "checkpoint": "yoloe-26s-seg-pf.pt",
+  "checkpoint_sha256": "01605da3f2e0e5325df45d5f5eef8e40b5b5c7d085399be3c33ac638258b150a",
+  "checkpoint_source": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yoloe-26s-seg-pf.pt",
+  "source_code": "https://github.com/ultralytics/ultralytics",
+  "license": "AGPL-3.0",
+  "license_policy": "https://www.ultralytics.com/license",
+  "text_model_for_finetuning": "yoloe-26s-seg.pt; PF checkpoints do not support training or set_classes directly",
+  "versions": {
+    "torch": "2.8.0",
+    "ultralytics": "8.4.193",
+    "coremltools": "9.0",
+    "numpy": "2.3.5"
+  },
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "export_arguments": {
+    "format": "coreml",
+    "imgsz": 640,
+    "batch": 1,
+    "nms": false,
+    "quantize": 32,
+    "dynamic": false,
+    "max_det": 300,
+    "agnostic_nms": true,
+    "device": "cpu"
+  },
+  "export_seconds": 2.573307750000822,
+  "actual_output_shapes": {
+    "var_1558": [
+      1,
+      300,
+      38
+    ],
+    "var_1637": [
+      1,
+      32,
+      160,
+      160
+    ]
+  },
+  "prediction_layout": "[batch,row,xyxy_pixels(4)+winning_score+class_index+mask_coefficients]",
+  "class_score_semantics": "Uncalibrated model confidence of the winning class, not a complete calibrated probability distribution.",
+  "verification": "Identical saved RGB square pixels to exported PyTorch branch and Core ML CPU_ONLY; two synthetic inputs and one real RGB frame. Not an accuracy benchmark or a live-camera test.",
+  "real_frame_source": "/Users/zhongjiehuang/Downloads/pelagivex/.cache/pair-study/bonn-chairs-near/rgb/0083.png",
+  "real_frame_sha256": "56487103eada835633871c5120740fe4b2b1004558a5b18a730a263ff9e6856a",
+  "parity": [
+    {
+      "sample": "synthetic-gray",
+      "synthetic": true,
+      "input_sha256": "94769666fcc75f92f95fad09e8e68028b7992b08a875ecd1d4aacda8b4a5ac97",
+      "coreml_cpu_only_seconds": 0.3073174170021957,
+      "confident_reference_rows": 0,
+      "matches": [],
+      "prototype_mean_absolute_error": 2.626972673169803e-06,
+      "prototype_max_absolute_error": 7.69495964050293e-05,
+      "coreml_class_values_integral": true
+    },
+    {
+      "sample": "synthetic-random",
+      "synthetic": true,
+      "input_sha256": "1ffd603d34c53a21163d53770b53a00884ccb356ad81b8ca71bdcc2515c4a0f1",
+      "coreml_cpu_only_seconds": 0.3264042920018255,
+      "confident_reference_rows": 1,
+      "matches": [
+        {
+          "reference_class": 1954,
+          "coreml_class": 1954,
+          "reference_score": 0.9729753136634827,
+          "coreml_score": 0.9729751944541931,
+          "box_normalized_mean_error": 7.152557657263969e-08,
+          "mask_coefficient_mean_error": 5.899928510189056e-07
+        }
+      ],
+      "prototype_mean_absolute_error": 9.455790177526069e-07,
+      "prototype_max_absolute_error": 8.285045623779297e-06,
+      "coreml_class_values_integral": true
+    },
+    {
+      "sample": "real-letterboxed",
+      "synthetic": false,
+      "input_sha256": "78ece83606d7fca9d112161374b5e6a770dd502459b4a28b487788187aa461fc",
+      "coreml_cpu_only_seconds": 0.3045571659968118,
+      "confident_reference_rows": 11,
+      "matches": [
+        {
+          "reference_class": 821,
+          "coreml_class": 821,
+          "reference_score": 0.9118269085884094,
+          "coreml_score": 0.9118269085884094,
+          "box_normalized_mean_error": 1.1324882365215672e-07,
+          "mask_coefficient_mean_error": 7.234048098325729e-07
+        },
+        {
+          "reference_class": 821,
+          "coreml_class": 821,
+          "reference_score": 0.8929172158241272,
+          "coreml_score": 0.8929170966148376,
+          "box_normalized_mean_error": 1.043081283569336e-07,
+          "mask_coefficient_mean_error": 5.185138434171677e-07
+        },
+        {
+          "reference_class": 3122,
+          "coreml_class": 3122,
+          "reference_score": 0.6690759658813477,
+          "coreml_score": 0.6690758466720581,
+          "box_normalized_mean_error": 1.5497207073167374e-07,
+          "mask_coefficient_mean_error": 6.035552360117435e-07
+        },
+        {
+          "reference_class": 4353,
+          "coreml_class": 4353,
+          "reference_score": 0.4412456750869751,
+          "coreml_score": 0.44130760431289673,
+          "box_normalized_mean_error": 1.341104507446289e-07,
+          "mask_coefficient_mean_error": 5.381880328059196e-07
+        },
+        {
+          "reference_class": 3963,
+          "coreml_class": 3963,
+          "reference_score": 0.2645534873008728,
+          "coreml_score": 0.2645529508590698,
+          "box_normalized_mean_error": 1.4305115314527939e-07,
+          "mask_coefficient_mean_error": 5.417969077825546e-07
+        },
+        {
+          "reference_class": 4353,
+          "coreml_class": 4353,
+          "reference_score": 0.23399686813354492,
+          "coreml_score": 0.2339199185371399,
+          "box_normalized_mean_error": 2.1457671550706436e-07,
+          "mask_coefficient_mean_error": 6.211630534380674e-07
+        },
+        {
+          "reference_class": 571,
+          "coreml_class": 571,
+          "reference_score": 0.22734251618385315,
+          "coreml_score": 0.22734224796295166,
+          "box_normalized_mean_error": 5.662441182607836e-08,
+          "mask_coefficient_mean_error": 6.094924174249172e-07
+        },
+        {
+          "reference_class": 571,
+          "coreml_class": 571,
+          "reference_score": 0.18366321921348572,
+          "coreml_score": 0.18366266787052155,
+          "box_normalized_mean_error": 5.662441182607836e-08,
+          "mask_coefficient_mean_error": 9.949435479938984e-07
+        },
+        {
+          "reference_class": 3122,
+          "coreml_class": 3122,
+          "reference_score": 0.1826883852481842,
+          "coreml_score": 0.1826871782541275,
+          "box_normalized_mean_error": 1.01327898960335e-07,
+          "mask_coefficient_mean_error": 3.936584107577801e-07
+        },
+        {
+          "reference_class": 3927,
+          "coreml_class": 3927,
+          "reference_score": 0.17390140891075134,
+          "coreml_score": 0.17390264570713043,
+          "box_normalized_mean_error": 1.0728835775353218e-07,
+          "mask_coefficient_mean_error": 8.651986718177795e-07
+        },
+        {
+          "reference_class": 3927,
+          "coreml_class": 3927,
+          "reference_score": 0.15252892673015594,
+          "coreml_score": 0.1525290459394455,
+          "box_normalized_mean_error": 8.046627186786282e-08,
+          "mask_coefficient_mean_error": 8.437782526016235e-07
+        }
+      ],
+      "prototype_mean_absolute_error": 1.2863185929745669e-06,
+      "prototype_max_absolute_error": 5.3763389587402344e-05,
+      "coreml_class_values_integral": true
+    }
+  ],
+  "model_files": {
+    "UniversalSeg.mlpackage/Data/com.apple.CoreML/model.mlmodel": "bb25a103c895cf70ab0c0ac7b850fa246ac1513b50d7577e9467a507572c1978",
+    "UniversalSeg.mlpackage/Data/com.apple.CoreML/weights/weight.bin": "8e23db158beb59c4a49a50b88275135bee5d3dc1929833e3fc16c9bab5c9b008",
+    "UniversalSeg.mlpackage/Manifest.json": "20a9db151fad125001797aac854ccc6a967125cf66358c890cce4c1c230a95b5"
+  }
+}
